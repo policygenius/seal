@@ -41,7 +41,7 @@ class SlackPoster
   def assign_poster_settings
     if @mood == "informative"
       @mood_hash[:icon_emoji]= ":#{@season_symbol}informative_seal:"
-      @mood_hash[:username]= "#{@season_name}Informative Seal"
+      @mood_hash[:username]= "#{@season_name}Sealy McSealFace"
     elsif @mood == "approval"
       @mood_hash[:icon_emoji]= ":#{@season_symbol}seal_of_approval:"
       @mood_hash[:username]= "#{@season_name}Seal of Approval"

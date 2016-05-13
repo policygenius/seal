@@ -50,7 +50,7 @@ GEM
       guard (~> 2.1)
       guard-compat (~> 1.1)
       rspec (>= 2.99.0, < 4.0)
-    hashie (3.4.3)
+    hashie (3.4.4)
     httparty (0.13.5)
       json (~> 1.8)
       multi_xml (>= 0.5.2)
@@ -113,13 +113,12 @@ GEM
       tilt (>= 1.3, < 3)
     slack-poster (1.0.1)
       httparty (~> 0.12)
-    slack-ruby-bot (0.7.0)
+    slack-ruby-bot (0.8.0)
       activesupport
-      faye-websocket
       giphy (~> 2.0.2)
       hashie
       slack-ruby-client (>= 0.6.0)
-    slack-ruby-client (0.7.0)
+    slack-ruby-client (0.7.2)
       activesupport
       faraday
       faraday_middleware
@@ -149,6 +148,7 @@ PLATFORMS
 
 DEPENDENCIES
   dotenv
+  faye-websocket
   guard
   guard-rspec
   jsonlint
@@ -159,11 +159,14 @@ DEPENDENCIES
   rspec
   sinatra
   slack-poster (~> 1.0.1)
-  slack-ruby-bot
+  slack-ruby-bot (~> 0.8.0)
   thin
   timecop
   tzinfo
   whenever
 
+RUBY VERSION
+   ruby 2.2.4p230
+
 BUNDLED WITH
-   1.11.2
+   1.12.3

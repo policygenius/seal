@@ -2,7 +2,7 @@ require 'spec_helper'
 require './lib/seal'
 
 describe Seal do
-  subject(:seal) { described_class.new(team) }
+  subject(:seal) { described_class.new(team: team) }
   let(:org_config) do
     {
       'lion' => {
