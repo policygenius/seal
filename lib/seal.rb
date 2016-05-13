@@ -10,9 +10,10 @@ class Seal
 
   attr_reader :mode
 
-  def initialize(team, mode=nil)
+  def initialize(team: team, mode: nil, repo: nil)
     @team = team
     @mode = mode
+    @repo = repo
   end
 
   def bark

@@ -29,9 +29,9 @@ describe 'slack_poster' do
         Timecop.freeze(Time.local(2015, 07, 16))
       end
 
-      it "posts as Informative Seal" do
+      it "posts as Sealy McSealFace" do
         slack_poster.send(:mood_hash)
-        expect(slack_poster.send(:mood_hash)).to eq "Informative Seal"
+        expect(slack_poster.send(:mood_hash)).to eq "Sealy McSealFace"
       end
     end
 
@@ -45,9 +45,9 @@ describe 'slack_poster' do
         expect(slack_poster.send(:halloween_season?)).to eq true
       end
 
-      it "posts as Halloween Informative Seal" do
+      it "posts as Halloween Sealy McSealFace" do
         slack_poster.send(:mood_hash)
-        expect(slack_poster.send(:mood_hash)).to eq "Halloween Informative Seal"
+        expect(slack_poster.send(:mood_hash)).to eq "Halloween Sealy McSealFace"
       end
     end
 
@@ -61,9 +61,9 @@ describe 'slack_poster' do
         expect(slack_poster.send(:festive_season?)).to eq true
       end
 
-      it "posts as Festive Season Informative Seal" do
+      it "posts as Festive Season Sealy McSealFace" do
         slack_poster.send(:mood_hash)
-        expect(slack_poster.send(:mood_hash)).to eq "Festive Season Informative Seal"
+        expect(slack_poster.send(:mood_hash)).to eq "Festive Season Sealy McSealFace"
       end
     end
   end

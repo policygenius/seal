@@ -2,4 +2,4 @@
 
 require './lib/seal'
 
-Seal.new(ARGV[0], ARGV[1]).bark
+Seal.new(team: ARGV[0], mode: ARGV[1]).bark

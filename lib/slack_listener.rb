@@ -4,11 +4,13 @@ require './lib/seal.rb'
 module SlackBot
   class SlackListener < SlackRubyBot::Bot
     match /:pr:/ do |client, data, match|
-      Seal.new('Developers').update(channel: data.channel)
+      Seal.new(team: 'Developers').update(channel: data.channel)
     end
 
-    command 'pr' do |client, data, match|
-      Seal.new('Developers').update(channel: data.channel)
+    JSON.parse(ENV['PG_REPOS']).each do |repo|
+      command repo do |client, data, match|
+        Seal.new(team: 'Developers', repo: repo).update(channel: data.channel)
+      end
     end
   end
 end
