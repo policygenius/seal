@@ -6,5 +6,9 @@ module SlackBot
     match /:pr:/ do |client, data, match|
       Seal.new('Developers').update(channel: data.channel)
     end
+
+    command 'pr' do |client, data, match|
+      Seal.new('Developers').update(channel: data.channel)
+    end
   end
 end
