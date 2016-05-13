@@ -1,5 +1,5 @@
 # Seal
-[![Build Status](https://travis-ci.org/binaryberry/seal.svg)](https://travis-ci.org/binaryberry/seal)
+[![Build Status](https://semaphoreci.com/api/v1/policygenius/seal/branches/add-pr-command/badge.svg)](https://semaphoreci.com/policygenius/seal)
 
 ##What is it?
 
