@@ -8,7 +8,7 @@ require './lib/slack_poster.rb'
 # Entry point for the Seal!
 class Seal
 
-  attr_reader :mode
+  attr_reader :mode, :repo
 
   def initialize(team: team, mode: nil, repo: nil)
     @team = team
@@ -62,6 +62,7 @@ class Seal
 
   def team_params(team)
     config = team_config(team)
+
     if config
       members = config['members']
       use_labels = config['use_labels']
@@ -75,6 +76,7 @@ class Seal
       exclude_titles = ENV['GITHUB_EXCLUDE_TITLES'] ? ENV['GITHUB_EXCLUDE_TITLES'].split(',') : nil
       @quotes = ENV['SEAL_QUOTES'] ? ENV['SEAL_QUOTES'].split(',') : nil
     end
+
     return fetch_from_github(members, use_labels, exclude_labels, exclude_titles) if @mode == nil
     @quotes
   end
@@ -84,7 +86,8 @@ def fetch_from_github(members, use_labels, exclude_labels, exclude_titles)
     git = GithubFetcher.new(members,
                             use_labels,
                             exclude_labels,
-                            exclude_titles
+                            exclude_titles,
+                            repo: repo
                            )
     git.list_pull_requests
   end

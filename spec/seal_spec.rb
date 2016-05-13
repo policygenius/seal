@@ -42,7 +42,7 @@ describe Seal do
       it 'fetches PRs for the tigers and only the tigers' do
         expect(GithubFetcher)
           .to receive(:new)
-          .with([], nil, nil, nil)
+          .with([], nil, nil, nil, repo: nil)
           .and_return(instance_double(GithubFetcher, list_pull_requests: []))
 
         seal.bark
@@ -58,12 +58,12 @@ describe Seal do
         it 'fetches PRs for the lions and the tigers' do
           expect(GithubFetcher)
             .to receive(:new)
-            .with([], nil, nil, nil)
+            .with([], nil, nil, nil, repo: nil)
             .and_return(instance_double(GithubFetcher, list_pull_requests: []))
 
           expect(GithubFetcher)
             .to receive(:new)
-            .with([], nil, nil, nil)
+            .with([], nil, nil, nil, repo: nil)
             .and_return(instance_double(GithubFetcher, list_pull_requests: []))
 
           seal.bark
