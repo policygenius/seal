@@ -1,5 +1,5 @@
 # Seal
-[![Build Status](https://semaphoreci.com/api/v1/policygenius/seal/branches/add-pr-command/badge.svg)](https://semaphoreci.com/policygenius/seal)
+[![Build Status](https://semaphoreci.com/api/v1/policygenius/seal/branches/master/badge.svg)](https://semaphoreci.com/policygenius/seal)
 
 ##What is it?
 
