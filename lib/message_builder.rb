@@ -1,29 +1,42 @@
 class MessageBuilder
 
-  attr_accessor :pull_requests, :report, :mood, :poster_mood
+  attr_accessor :pull_requests, :report, :poster_mood, :percy, :content, :mode
 
-  def initialize(content, mode=nil)
+  def initialize(content, percy: false, mode: nil)
     @content = content
     @mode = mode
+    @percy = percy
   end
 
   def build
-    if @mode == "quotes"
+    if mode == "quotes"
       bark_about_quotes
+    elsif percy
+      percy_seal
     else
       github_seal
     end
   end
 
-  def github_seal
-    if !old_pull_requests.empty?
-      @poster_mood = "angry"
-      bark_about_old_pull_requests
-    elsif @content.empty?
-      @poster_mood = "approval"
+  def percy_seal
+    if content.empty?
+      self.poster_mood = "approval"
       no_pull_requests
     else
-      @poster_mood = "informative"
+      self.poster_mood = "informative"
+      "Hey <!subteam^#{ENV['DESIGN_TEAM_SLACK_HANDLE']}>, here are Percy builds waiting for approval: \n\n#{content}"
+    end
+  end
+
+  def github_seal
+    if !old_pull_requests.empty?
+      self.poster_mood = "angry"
+      bark_about_old_pull_requests
+    elsif content.empty?
+      self.poster_mood = "approval"
+      no_pull_requests
+    else
+      self.poster_mood = "informative"
       list_pull_requests
     end
   end
@@ -44,12 +57,12 @@ class MessageBuilder
   private
 
   def old_pull_requests
-    @old_pull_requests ||= @content.select { |_title, pr| rotten?(pr) }
+    @old_pull_requests ||= content.select { |_title, pr| rotten?(pr) }
   end
 
   def bark_about_old_pull_requests
     angry_bark = old_pull_requests.keys.each_with_index.map { |title, n| present(title, n + 1) }
-    recent_pull_requests = @content.reject { |_title, pr| rotten?(pr) }
+    recent_pull_requests = content.reject { |_title, pr| rotten?(pr) }
     list_recent_pull_requests = recent_pull_requests.keys.each_with_index.map { |title, n| present(title, n + 1) }
     informative_bark = "There are also these pull requests that need to be reviewed today:\n\n#{list_recent_pull_requests.join} " if !recent_pull_requests.empty?
     "#{angry_exclamation} #{these(old_pull_requests.length)} #{pr_plural(old_pull_requests.length)} not been updated in over 2 days.\n\n#{angry_bark.join}\nRemember each time you forget to review your pull requests, a baby seal dies. :happyseal:
@@ -57,7 +70,7 @@ class MessageBuilder
   end
 
   def list_pull_requests
-    message = @content.keys.each_with_index.map { |title, n| present(title, n + 1) }
+    message = content.keys.each_with_index.map { |title, n| present(title, n + 1) }
     "Hey! Here are the pull requests that need to be reviewed today:\n\n#{message.join}\nMerry reviewing!"
   end
 
@@ -66,11 +79,11 @@ class MessageBuilder
   end
 
   def bark_about_quotes
-    @content.sample
+    content.sample
   end
 
   def comments(pull_request)
-    return " comment" if @content[pull_request]["comments_count"] == "1"
+    return " comment" if content[pull_request]["comments_count"] == "1"
     " comments"
   end
 
@@ -95,7 +108,7 @@ class MessageBuilder
   end
 
   def present(pull_request, index)
-    pr = @content[pull_request]
+    pr = content[pull_request]
     days = age_in_days(pr)
     thumbs_up = ''
     thumbs_up = " | #{pr["thumbs_up"].to_i} :+1:" if pr["thumbs_up"].to_i > 0
