@@ -39,7 +39,7 @@ class GithubFetcher
       .items
       .map { |g| [g[:repository_url].gsub(/.*repos\//, ''), g[:number], g[:title]] }
       .map { |repo, number, title| [repo, github.pull_request_commits(repo, number).first[:sha], title] }
-      .select { |repo, sha, title| !title.include?('WIP') }
+      .select { |repo, sha, title| !title.downcase.include?('wip') }
       .map { |repo, sha, title| [github.statuses(repo, sha), title] }
       .map { |statuses, title| [statuses.select { |s| s[:context] == 'percy' }.first, title] }
       .select { |status, title| status && status[:description] == "Visual diffs found!" }
