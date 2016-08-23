@@ -21,7 +21,7 @@ class MessageBuilder
   def percy_seal
     if content.empty?
       self.poster_mood = "approval"
-      no_pull_requests
+      no_pull_requests(percy: true)
     else
       self.poster_mood = "informative"
       "Hey <!subteam^#{ENV['DESIGN_TEAM_SLACK_HANDLE']}>, here are Percy builds waiting for approval: \n\n#{content}"
@@ -74,8 +74,10 @@ class MessageBuilder
     "Hey! Here are the pull requests that need to be reviewed today:\n\n#{message.join}\nMerry reviewing!"
   end
 
-  def no_pull_requests
-    ":happyseal: :happyseal: :happyseal:\n\nNo pull requests to review! :rainbow: :sunny: :metal: :tada:"
+  def no_pull_requests(percy: false)
+    items = percy ? 'percy diffs' : 'pull requests'
+
+    ":happyseal: :happyseal: :happyseal:\n\nNo #{items} to review! :rainbow: :sunny: :metal: :tada:"
   end
 
   def bark_about_quotes
