@@ -24,7 +24,7 @@ class MessageBuilder
       no_pull_requests(percy: true)
     else
       self.poster_mood = "informative"
-      "Hey <!subteam^#{ENV['DESIGN_TEAM_SLACK_HANDLE']}>, here are Percy builds waiting for approval: \n\n#{content}"
+      "Hey <!subteam^#{ENV['DESIGN_TEAM_SLACK_HANDLE']}>, here are Percy builds waiting for approval: \n\n#{list_percy_diffs(content)}"
     end
   end
 
@@ -72,6 +72,12 @@ class MessageBuilder
   def list_pull_requests
     message = content.keys.each_with_index.map { |title, n| present(title, n + 1) }
     "Hey! Here are the pull requests that need to be reviewed today:\n\n#{message.join}\nMerry reviewing!"
+  end
+
+  def list_percy_diffs(content)
+    content.each_with_index.map do |element, index|
+      "*#{index + 1}) #{element.first}* | #{element.last} \n"
+    end.join
   end
 
   def no_pull_requests(percy: false)

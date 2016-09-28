@@ -165,8 +165,5 @@ DEPENDENCIES
   tzinfo
   whenever
 
-RUBY VERSION
-   ruby 2.2.4p230
-
 BUNDLED WITH
    1.12.3
