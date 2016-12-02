@@ -3,7 +3,6 @@ require 'json'
 
 class GithubFetcher
   ORGANISATION ||= ENV['SEAL_ORGANISATION']
-  REPOS ||= ENV['PG_REPOS'] ? JSON.parse(ENV['PG_REPOS']) : ['policygenius']
 
   attr_accessor :people, :repo, :github
 

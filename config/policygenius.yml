@@ -1,14 +1,4 @@
 Developers:
-  members:
-    - bradwheel
-    - ianyamey
-    - j-clark
-    - JustinTernullo
-    - kellywu
-    - PepperTeasdale
-    - petrgazarov
-    - elky
-
   channel:
     "#engineering"
 
@@ -16,3 +6,10 @@ Developers:
     - WIP
     - A/B Test
     - AB Test
+    - No mergey
+    - Dont merge
+    - Don't merge
+    - No merge
+
+  exclude_labels:
+    - paused

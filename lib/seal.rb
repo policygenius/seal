@@ -90,9 +90,9 @@ class Seal
     end
 
     if percy
-      fetch_percy_from_github(members, use_labels, exclude_labels, exclude_titles)
+      fetch_percy_from_github([], use_labels, exclude_labels, exclude_titles)
     else
-      return fetch_from_github(members, use_labels, exclude_labels, exclude_titles) if @mode == nil
+      return fetch_from_github([], use_labels, exclude_labels, exclude_titles) if @mode == nil
       @quotes
     end
   end

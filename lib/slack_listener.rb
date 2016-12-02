@@ -10,11 +10,5 @@ module SlackBot
     match /:percy:/ do |client, data, match|
       Seal.new(team: 'Developers').update_percy(channel: data.channel)
     end
-
-    JSON.parse(ENV['PG_REPOS']).each do |repo|
-      command repo do |client, data, match|
-        Seal.new(team: 'Developers', repo: repo).update(channel: data.channel)
-      end
-    end
   end
 end
