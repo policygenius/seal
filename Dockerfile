@@ -12,7 +12,6 @@ WORKDIR /lib
 RUN bundle install
 RUN touch /var/log/cron.log && chmod go+rw /var/log/cron.log
 ADD . /lib
-touch /var/log/whenever.log
 
 ENV PORT 9292
 EXPOSE 9292
