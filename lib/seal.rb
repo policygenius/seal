@@ -21,7 +21,7 @@ class Seal
   end
 
   def update(channel: nil)
-    teams.each { |team| update_team(team: team, channel: channel) }
+    update_team(team: teams.first, channel: channel)
   end
 
   def update_percy(channel: nil)
