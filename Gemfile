@@ -10,7 +10,7 @@ gem 'whenever', :require => false
 gem 'tzinfo'
 gem 'slack-ruby-bot', '~> 0.8.0'
 gem 'dotenv'
-gem 'faye-websocket'
+gem 'faye-websocket', '~> 0.10.5'
 
 group :test do
   gem 'guard'

@@ -4,9 +4,9 @@ require 'json'
 class GithubFetcher
   ORGANISATION ||= ENV['SEAL_ORGANISATION']
 
-  attr_accessor :people, :repo, :github
+  attr_accessor :people, :repo, :github, :exclude_repo
 
-  def initialize(team_members_accounts, use_labels, exclude_labels, exclude_titles, repo: nil)
+  def initialize(team_members_accounts, use_labels, exclude_labels, exclude_titles, repo: nil, exclude_repo: nil)
     @github = Octokit::Client.new(:access_token => ENV['GITHUB_TOKEN'])
     github.user.login
     Octokit.auto_paginate = true
@@ -16,6 +16,7 @@ class GithubFetcher
     @exclude_titles = exclude_titles.map(&:downcase).uniq if exclude_titles
     @labels = {}
     @repo = repo
+    @exclude_repo = exclude_repo
   end
 
   def list_pull_requests
@@ -26,6 +27,8 @@ class GithubFetcher
       if repo
         next unless repo == repo_name
       end
+
+      next if repo_name == exclude_repo
 
       next if hidden?(pull_request, repo_name)
       pull_requests[pull_request.title] = present_pull_request(pull_request, repo_name)

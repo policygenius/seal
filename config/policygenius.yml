@@ -1,6 +1,22 @@
-Developers:
+Engineers:
   channel:
-    "#engineering"
+    "ENGINEERING_CHANNEL_ID"
+
+  exclude_titles:
+    - WIP
+    - A/B Test
+    - AB Test
+    - No mergey
+    - Dont merge
+    - Don't merge
+    - No merge
+
+  exclude_labels:
+    - paused
+
+Frontend:
+  channel:
+    "FRONTEND_CHANNEL_ID"
 
   exclude_titles:
     - WIP
